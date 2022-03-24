@@ -1,12 +1,11 @@
 terraform {
-  backend "remote" {
+  cloud {
     organization = "lmhd"
 
     workspaces {
-      name = "vault-okta"
+      tags = ["vault", "okta"]
     }
   }
-
   required_providers {
     vault = {
       source  = "hashicorp/vault"
