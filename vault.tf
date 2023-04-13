@@ -39,9 +39,19 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "profile",
     "email",
   ]
-  bound_claims = {
-    groups = join(",", each.value.bound_groups)
+  groups_claim = "groups"
+
+  claim_mappings = {
+    "name"               = "name",
+    "preferred_username" = "preferred_username",
+    "zoneinfo"           = "zoneinfo",
+    "updated_at"         = "updated_at",
+    "groups"             = "groups",
   }
+
+  #  bound_claims = {
+  #    groups = join(",", each.value.bound_groups)
+  #  }
   verbose_oidc_logging = true
 }
 
@@ -52,3 +62,4 @@ resource "vault_mount" "developers" {
   path = "developers"
 }
 */
+
