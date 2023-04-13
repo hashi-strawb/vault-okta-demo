@@ -38,34 +38,47 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "openid",
     "profile",
     "email",
-    #"groups",
   ]
   groups_claim = "groups"
 
   claim_mappings = {
     "name"               = "name",
+    "family_name"        = "family_name",
+    "given_name"         = "given_name",
+    "nickname"           = "nickname",
     "preferred_username" = "preferred_username",
-    "zoneinfo"           = "zoneinfo",
-    #"updated_at"         = "updated_at",
-    #"groups"             = "groups",
+    "email"              = "email",
   }
 
-  #  bound_claims = {
-  #    groups = join(",", each.value.bound_groups)
-  #  }
   verbose_oidc_logging = true
 }
 
-/*
-# add KV for developers
-resource "vault_mount" "developers" {
-  type = "kv"
-  path = "developers"
+
+locals {
+  # TODO: Paramterise these
+  groups_policies = {
+    # Dummy nonexistent policies for now, to proove the concept
+    "vault-admins" : ["okta-group-vault-admins"],
+    "vault-devs" : ["okta-group-vault-devs"],
+  }
+
+
+  # TODO: add vault-admins (for example) to a parent group
+  groups_parents = {
+  }
 }
-*/
 
+resource "vault_identity_group" "group" {
+  for_each = local.groups_policies
+  name     = "Okta: ${each.key}"
+  type     = "external"
+  policies = each.value
+}
 
+resource "vault_identity_group_alias" "group-alias" {
+  for_each = local.groups_policies
 
-
-
-# TODO: Create External Vault Groups to map to internal groups
+  name           = each.key
+  mount_accessor = vault_jwt_auth_backend.okta_oidc.accessor
+  canonical_id   = vault_identity_group.group[each.key].id
+}
