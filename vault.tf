@@ -38,6 +38,7 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "openid",
     "profile",
     "email",
+    "groups",
   ]
   groups_claim = "groups"
 
@@ -46,7 +47,7 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "preferred_username" = "preferred_username",
     "zoneinfo"           = "zoneinfo",
     "updated_at"         = "updated_at",
-    "groups"             = "groups",
+    #"groups"             = "groups",
   }
 
   #  bound_claims = {
