@@ -46,7 +46,7 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "name"               = "name",
     "preferred_username" = "preferred_username",
     "zoneinfo"           = "zoneinfo",
-    "updated_at"         = "updated_at",
+    #"updated_at"         = "updated_at",
     #"groups"             = "groups",
   }
 
