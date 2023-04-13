@@ -8,7 +8,7 @@ resource "vault_jwt_auth_backend" "okta_oidc" {
   bound_issuer       = okta_auth_server.vault.issuer
   oidc_client_id     = okta_app_oauth.vault.client_id
   oidc_client_secret = okta_app_oauth.vault.client_secret
-  default_role       = "okta_admin"
+  default_role       = "okta_default"
   tune {
     listing_visibility = "unauth"
     default_lease_ttl  = var.okta_default_lease_ttl
@@ -63,3 +63,8 @@ resource "vault_mount" "developers" {
 }
 */
 
+
+
+
+
+# TODO: Create External Vault Groups to map to internal groups
