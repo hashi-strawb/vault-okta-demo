@@ -1,3 +1,6 @@
+strawb.auto.tfvars.bak
+
+
 # Local .terraform directories
 **/.terraform/*
 
