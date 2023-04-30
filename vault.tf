@@ -73,6 +73,12 @@ resource "vault_identity_group" "group" {
   name     = "Okta: ${each.key}"
   type     = "external"
   policies = each.value
+
+  lifecycle {
+    ignore_changes = [
+      member_entity_ids
+    ]
+  }
 }
 
 resource "vault_identity_group_alias" "group-alias" {
