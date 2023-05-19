@@ -66,6 +66,9 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "locale"   = "locale",
     #"updated_at"     = "updated_at",
     #"email_verified" = "email_verified",
+
+    # Can't do non-strings because of
+    # https://github.com/hashicorp/vault-plugin-auth-jwt/issues/109
   }
 
   verbose_oidc_logging = true
