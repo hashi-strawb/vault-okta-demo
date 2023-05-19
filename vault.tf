@@ -41,6 +41,7 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
   ]
   groups_claim = "groups"
 
+  # From https://developer.okta.com/docs/reference/api/oidc/#id-token-payload
   claim_mappings = {
     "name"               = "name",
     "family_name"        = "family_name",
@@ -48,6 +49,23 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
     "nickname"           = "nickname",
     "preferred_username" = "preferred_username",
     "email"              = "email",
+
+
+
+    "ver"            = "ver",
+    "sub"            = "sub",
+    "iss"            = "iss",
+    "aud"            = "aud",
+    "iat"            = "iat",
+    "exp"            = "expr",
+    "jti"            = "jti",
+    "auth_time"      = "auth_time",
+    "at_hash"        = "at_hash",
+    "profile"        = "profile",
+    "zoneinfo"       = "zoneinfo",
+    "locale"         = "locale",
+    "updated_at"     = "updated_at",
+    "email_verified" = "email_verified",
   }
 
   verbose_oidc_logging = true
