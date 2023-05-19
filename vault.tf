@@ -52,20 +52,20 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
 
 
 
-    "ver"            = "ver",
-    "sub"            = "sub",
-    "iss"            = "iss",
-    "aud"            = "aud",
-    "iat"            = "iat",
-    "exp"            = "expr",
-    "jti"            = "jti",
-    "auth_time"      = "auth_time",
-    "at_hash"        = "at_hash",
-    "profile"        = "profile",
-    "zoneinfo"       = "zoneinfo",
-    "locale"         = "locale",
-    "updated_at"     = "updated_at",
-    "email_verified" = "email_verified",
+    #"ver"            = "ver",
+    "sub" = "sub",
+    "iss" = "iss",
+    "aud" = "aud",
+    #"iat"            = "iat",
+    #"exp"            = "expr",
+    "jti" = "jti",
+    #"auth_time"      = "auth_time",
+    "at_hash"  = "at_hash",
+    "profile"  = "profile",
+    "zoneinfo" = "zoneinfo",
+    "locale"   = "locale",
+    #"updated_at"     = "updated_at",
+    #"email_verified" = "email_verified",
   }
 
   verbose_oidc_logging = true
