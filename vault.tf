@@ -75,41 +75,6 @@ resource "vault_jwt_auth_backend_role" "okta_role" {
 }
 
 
-locals {
-  # TODO: Paramterise these
-  groups_policies = {
-    # Dummy nonexistent policies for now, to proove the concept
-    "vault-admins" : ["okta-group-vault-admins"],
-    "vault-devs" : ["okta-group-vault-devs"],
-  }
-
-
-  # TODO: add vault-admins (for example) to a parent group
-  groups_parents = {
-  }
-}
-
-resource "vault_identity_group" "group" {
-  for_each = local.groups_policies
-  name     = "Okta: ${each.key}"
-  type     = "external"
-  policies = each.value
-
-  lifecycle {
-    ignore_changes = [
-      member_entity_ids
-    ]
-  }
-}
-
-resource "vault_identity_group_alias" "group-alias" {
-  for_each = local.groups_policies
-
-  name           = each.key
-  mount_accessor = vault_jwt_auth_backend.okta_oidc.accessor
-  canonical_id   = vault_identity_group.group[each.key].id
-}
-
 
 
 
