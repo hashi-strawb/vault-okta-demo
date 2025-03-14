@@ -171,4 +171,6 @@ resource "vault_jwt_auth_backend_role" "okta_role_admin" {
   }
 
   verbose_oidc_logging = true
+
+  token_ttl = 60 * 60 # 1h
 }
